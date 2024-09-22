@@ -3,7 +3,7 @@
 ![GYEWO8Yb0AY_2W_](https://github.com/user-attachments/assets/10af7aab-526e-4003-b91c-968416ca783c)
 
 ## Prerequisites
-- You need to have 0.0035 $ETH on Base Mainnet and 0.002 $ETH on Zora Mainnet in your wallet from where u want to deploy bridge contract
+- You need to have 0.0035 $ETH on Base Mainnet and 0.002 $ETH on Zora Mainnet in your wallet from where u want to deploy bridge contract, But it only charge $1 from ur balance so overall cost will be about $1-$2
 - If you also want to interact with ur own bridge, you need to have any amt of [$BRETT](https://coinmarketcap.com/currencies/based-brett/) token on Base Mainnet in your wallet, u can swap from Uniswap
 
 ## Installation
