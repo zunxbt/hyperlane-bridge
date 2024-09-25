@@ -7,20 +7,9 @@ show() {
     echo -e "\033[1;35m$1\033[0m"
 }
 
-export NVM_DIR="$HOME/.nvm"
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-    show "Loading NVM..."
-    source "$NVM_DIR/nvm.sh"
-else
-    show "NVM not found, installing NVM..."
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
-    source "$NVM_DIR/nvm.sh"
-fi
+show "Installing Node.js and npm..."
+sudo apt update && sudo apt install nodejs npm
 
-show "Installing Node.js..."
-nvm install node
-
-# Check if Hyperlane CLI is installed globally
 if ! command -v hyperlane &> /dev/null; then
     show "Hyperlane CLI not found. Installing..."
     npm install -g @hyperlane-xyz/cli
