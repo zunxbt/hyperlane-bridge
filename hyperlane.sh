@@ -8,7 +8,7 @@ show() {
 }
 
 show "Installing Node.js and npm..."
-sudo apt update && sudo apt install nodejs npm
+sudo apt update && sudo apt install nodejs npm -y
 
 if ! command -v hyperlane &> /dev/null; then
     show "Hyperlane CLI not found. Installing..."
