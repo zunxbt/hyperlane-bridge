@@ -17,13 +17,8 @@ else
     source "$NVM_DIR/nvm.sh"
 fi
 
-# Check if Node.js is installed
-if ! command -v node &> /dev/null; then
-    show "Node.js not found. Installing Node.js..."
-    nvm install node
-else
-    show "Node.js is already installed."
-fi
+show "Installing Node.js..."
+nvm install node
 
 # Check if Hyperlane CLI is installed globally
 if ! command -v hyperlane &> /dev/null; then
