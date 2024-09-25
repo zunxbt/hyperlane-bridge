@@ -8,7 +8,14 @@ show() {
 }
 
 show "Installing Node.js and npm..."
-sudo apt update && sudo apt install nodejs npm -y
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+source ~/.bashrc
+
+nvm install 22 && nvm alias default 22 && nvm use default && nvm install-latest-npm
 
 if ! command -v hyperlane &> /dev/null; then
     show "Hyperlane CLI not found. Installing..."
