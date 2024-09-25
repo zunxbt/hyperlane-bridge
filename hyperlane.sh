@@ -7,35 +7,32 @@ show() {
     echo -e "\033[1;35m$1\033[0m"
 }
 
-show "Installing Node.js and npm..."
+show "Installing NVM..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+export NVM_DIR="/usr/local/share/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 source ~/.bashrc
 
-nvm install 22 && nvm alias default 22 && nvm use default && nvm install-latest-npm
+nvm install 18
+nvm use 18
+nvm alias default 18
 
-if ! command -v hyperlane &> /dev/null; then
-    show "Hyperlane CLI not found. Installing..."
-    npm install -g @hyperlane-xyz/cli
-else
-    show "Hyperlane CLI is already installed."
-fi
-echo
+npm install -g yarn
+
+show "Installing Hyperlane..."
+rm -rf hyperlane-monorepo && git clone https://github.com/hyperlane-xyz/hyperlane-monorepo.git && cd hyperlane-monorepo && yarn install && yarn build && cd typescript/cli
 
 
 read -p "Enter your private key: " PVT_KEY
 read -p "Enter your wallet address of the above private key: " WALLET
 
-# Export the private key
 export HYP_KEY="$PVT_KEY"
 
-# Create the configs directory if it doesn't exist
 mkdir -p ./configs
 
-# Create the warp-route-deployment.yaml configuration file
 cat <<EOF > ./configs/warp-route-deployment.yaml
 base:
   interchainSecurityModule:
@@ -68,6 +65,5 @@ zoramainnet:
   type: synthetic
 EOF
 
-# Deploy using Hyperlane
 show "Deploying using Hyperlane..."
-hyperlane warp deploy
+yarn hyperlane warp deploy
