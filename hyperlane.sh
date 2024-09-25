@@ -10,13 +10,14 @@ show() {
 show "Installing NVM..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 
-# Ubuntu User
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Set NVM_DIR based on the environment
+if [ -d "/usr/local/share/nvm" ]; then
+    export NVM_DIR="/usr/local/share/nvm"  # CodeSpace User
+else
+    export NVM_DIR="$HOME/.nvm"  # Ubuntu User
+fi
 
-# CodeSpace User
-export NVM_DIR="/usr/local/share/nvm"
+# Load nvm
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
