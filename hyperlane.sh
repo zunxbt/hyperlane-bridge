@@ -7,26 +7,8 @@ show() {
     echo -e "\033[1;35m$1\033[0m"
 }
 
-show "Installing NVM..."
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
-
-# Set NVM_DIR based on the environment
-if [ -d "/usr/local/share/nvm" ]; then
-    export NVM_DIR="/usr/local/share/nvm"  # CodeSpace User
-else
-    export NVM_DIR="$HOME/.nvm"  # Ubuntu User
-fi
-
-# Load nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-sleep 1
-source ~/.bashrc
-sleep 1
-nvm install 18
-nvm use 18
-nvm alias default 18
+show "Installing NVM, Node and npm..."
+source <(wget -O - https://raw.githubusercontent.com/zunxbt/installation/main/node.sh)
 
 npm install -g yarn
 
